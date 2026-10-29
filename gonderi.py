@@ -2,10 +2,24 @@
 Sıra: en uzun süredir paylaşılmayan market. Verisi bir önceki paylaşımla aynıysa o market atlanır.
 Ürün/fiyat yalnızca topla.py'nin doğruladığı veriden gelir."""
 import hashlib, json, os, shutil, subprocess, sys, time
+from datetime import datetime, timedelta, timezone
 
 MARKETLER = ["bim", "migros", "sok", "carrefour"]
 ETIKET = {"bim": "#bim #bimaktüel", "migros": "#migros", "sok": "#şok #şokaktüel", "carrefour": "#carrefoursa"}
 gecmis = json.load(open("gecmis.json", encoding="utf-8")) if os.path.exists("gecmis.json") else []
+TR = timezone(timedelta(hours=3))
+
+
+def bugun_paylasildi():
+    """gecmis.json UTC tutar; Türkiye gününe çevirip bugün paylaşım var mı bakar."""
+    gun = datetime.now(TR).date()
+    return any(datetime.strptime(g["tarih"], "%Y-%m-%d %H:%M").replace(tzinfo=timezone.utc).astimezone(TR).date() == gun
+               for g in gecmis)
+
+
+def cikis(devam):
+    if os.environ.get("GITHUB_OUTPUT"):
+        open(os.environ["GITHUB_OUTPUT"], "a").write(f"devam={devam}\n")
 
 
 def son(m):
@@ -25,7 +39,15 @@ def caption(d, m):
 
 
 if __name__ == "__main__":
+    # zamanlayıcı günde birkaç kez uyanır (yedek); bugün paylaşıldıysa tekrar paylaşma
+    if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and bugun_paylasildi():
+        print("Bugün zaten paylaşıldı")
+        cikis("false")
+        sys.exit(0)
     subprocess.run([sys.executable, "topla.py"], check=True)
+    if not any(os.path.exists(f"veri/{m}.json") for m in MARKETLER):
+        cikis("false")
+        sys.exit("Hiçbir marketten veri alınamadı: kaynak siteler değişmiş ya da engellemiş olabilir")  # çalışma kırmızı olur, GitHub e-posta atar
     for m in sorted(MARKETLER, key=lambda m: son(m)[0]):
         if not os.path.exists(f"veri/{m}.json"):
             continue
@@ -55,5 +77,4 @@ if __name__ == "__main__":
     else:
         devam = "false"
         print("Paylaşılacak yeni içerik yok")
-    if os.environ.get("GITHUB_OUTPUT"):
-        open(os.environ["GITHUB_OUTPUT"], "a").write(f"devam={devam}\n")
+    cikis(devam)

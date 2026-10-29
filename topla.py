@@ -2,11 +2,13 @@
 Her ürün dogrula() ile kontrol edilir: eski>yeni, indirim % bizim hesabımız. Tutmayan ürün 'dogrulandi:false' olur ve atılır.
 Kullanım: python topla.py [market ...]   (boşsa hepsi)    Örn: python topla.py bim migros"""
 import html, json, os, re, sys, time
+from datetime import date, datetime, timedelta, timezone
 import requests
 
 H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36",
      "Accept-Language": "tr-TR,tr;q=0.9"}
 N = 12  # gönderiye girecek ürün sayısı
+TR = timezone(timedelta(hours=3))
 BAS = "https://www."
 
 
@@ -50,10 +52,29 @@ def urun(ad, yeni, eski, gorsel, detay="", not_=""):
             "not": not_, "src": gorsel, "dogrulandi": ok}
 
 
+AYLAR = {"ocak": 1, "şubat": 2, "mart": 3, "nisan": 4, "mayıs": 5, "haziran": 6, "temmuz": 7,
+         "ağustos": 8, "eylül": 9, "ekim": 10, "kasım": 11, "aralık": 12}
+
+
+def aralik(e, bugun):
+    """'24-30 Ekim' veya '27 Ekim-2 Kasım' -> (başlangıç, bitiş); tanınmazsa None."""
+    m = re.match(r"(\d{1,2})\s*([^\d\s-]+)?\s*-\s*(\d{1,2})\s+([^\d\s-]+)", e.strip())
+    if not m or m.group(4).lower() not in AYLAR or (m.group(2) and m.group(2).lower() not in AYLAR):
+        return None
+    a2 = AYLAR[m.group(4).lower()]
+    a1 = AYLAR[m.group(2).lower()] if m.group(2) else a2
+    bit = date(bugun.year, a2, int(m.group(3)))
+    bas = date(bugun.year - (a1 > a2), a1, int(m.group(1)))  # Aralık-Ocak geçişi
+    return bas, bit
+
+
 def bim():
     ana = al(BAS + "bim.com.tr/Categories/100/aktuel-urunler.aspx").text
     liste = [(a, metin(b)) for a, b in re.findall(r'href="/Categories/100/aktuel-urunler\.aspx\?top=1&Bim_AktuelTarihKey=(\d+)"[^>]*>(.*?)</a>', ana, re.S)]
-    hafta = next(((k, e) for k, e in liste if "-" in e), liste[0])  # "24-30 Ekim" gibi haftalık katalog
+    bugun = datetime.now(TR).date()
+    hafta = next(((k, e) for k, e in liste if (r := aralik(e, bugun)) and r[0] <= bugun <= r[1]), None)
+    if not hafta:  # süresi geçmiş katalog paylaşılmaz
+        raise RuntimeError(f"Bugünü kapsayan BİM kataloğu yok: {[e for _, e in liste]}")
     s = al(BAS + f"bim.com.tr/Categories/100/aktuel-urunler.aspx?top=1&Bim_AktuelTarihKey={hafta[0]}").text
     out = []
     for blok in s.split('<div class="product col')[1:]:
@@ -116,6 +137,11 @@ def carrefour():
 MARKETLER = {"bim": bim, "migros": migros, "sok": sok, "carrefour": carrefour}
 
 if __name__ == "__main__":
+    g = date(2026, 10, 29)
+    assert aralik("24-30 Ekim", g) == (date(2026, 10, 24), date(2026, 10, 30))
+    assert aralik("27 Ekim-2 Kasım", g) == (date(2026, 10, 27), date(2026, 11, 2))
+    assert aralik("29 Aralık-4 Ocak", date(2027, 1, 2)) == (date(2026, 12, 29), date(2027, 1, 4))
+    assert aralik("28 Ekim Çarşamba", g) is None
     assert dogrula("x", 70.0, 100.0) == (True, 30) and dogrula("x", 100.0, 70.0)[0] is False and dogrula("", 5.0)[0] is False
     os.makedirs("veri", exist_ok=True)
     for m in (sys.argv[1:] or MARKETLER):
@@ -139,6 +165,6 @@ if __name__ == "__main__":
             except Exception:
                 u["dogrulandi"] = False  # fotoğrafı alınamayan ürün girmez
         iyi = [u for u in iyi if u["dogrulandi"]]
-        veri = {**baslik, "kontrol_tarihi": time.strftime("%d.%m.%Y"), "demo": False, "urunler": iyi}
+        veri = {**baslik, "kontrol_tarihi": datetime.now(TR).strftime("%d.%m.%Y"), "demo": False, "urunler": iyi}
         json.dump(veri, open(f"veri/{m}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         print(f"{m}: okunan {len(ham)}, doğrulanan {sum(u['dogrulandi'] for u in ham)}, yazılan {len(iyi)}; geçerlilik: {baslik['gecerlilik']}")
