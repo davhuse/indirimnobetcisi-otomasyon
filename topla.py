@@ -7,7 +7,7 @@ import requests
 
 H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36",
      "Accept-Language": "tr-TR,tr;q=0.9"}
-N = 12  # gönderiye girecek ürün sayısı
+N = 40  # havuz; gönderiye gonderi.py 8 taze ürün seçer
 TR = timezone(timedelta(hours=3))
 BAS = "https://www."
 
@@ -18,6 +18,8 @@ def al(url, **k):
             r = requests.get(url, headers={**H, **k.pop("headers", {})}, timeout=30, **k)
             if r.ok:
                 return r
+            if r.status_code in (403, 429):  # bot koruması: tekrar denemek işe yaramaz
+                break
         except requests.RequestException:
             pass
         time.sleep(2 * (d + 1))
@@ -93,19 +95,20 @@ def bim():
 
 def migros():
     out = []
-    for sf in range(1, 4):
+    for sf in range(1, 7):
         j = al(BAS + f"migros.com.tr/rest/search/screens/indirimli-urunler-c-4?sayfa={sf}", headers={"Accept": "application/json"}).json()
         for p in j["data"]["searchInfo"]["storeProductInfos"]:
             if p.get("discountRate", 0) <= 0 or not p.get("images"):
                 continue
-            out.append(urun(p["name"].strip(), p["shownPrice"] / 100, p["regularPrice"] / 100, p["images"][0]["urls"]["PRODUCT_DETAIL"]))
+            kop = "Migroskop" if any(b.get("value") == "MİGROSKOP" for b in p.get("badges", [])) else ""
+            out.append(urun(p["name"].strip(), p["shownPrice"] / 100, p["regularPrice"] / 100, p["images"][0]["urls"]["PRODUCT_DETAIL"], "", kop))
     return {"market": "Migros", "tema": "turuncu", "baslik": "İndirimli ürünler", "gecerlilik": "Bugünkü online fiyatlar",
             "kaynak_url": "migros.com.tr/indirimli-urunler-c-4"}, out
 
 
 def sok():
     out = []
-    for sf in range(1, 4):
+    for sf in range(1, 5):
         s = al(BAS + f"sokmarket.com.tr/indirimli-urunler-cms-pl1?page={sf}").text
         for c in s.split("PLPProductListing_PLPCardParent")[1:]:
             ad = re.search(r'class="[^"]*(?:name|Name|title|Title)[^"]*"[^>]*>([^<]{4,100})<', c)

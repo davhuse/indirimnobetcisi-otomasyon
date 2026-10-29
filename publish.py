@@ -47,5 +47,21 @@ medya = api(f"{UID}/media_publish", creation_id=kap)["id"]
 print("Paylaşıldı, medya id:", medya)
 
 gecmis = json.load(open("gecmis.json", encoding="utf-8")) if os.path.exists("gecmis.json") else []
-gecmis.append({"tarih": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "market": post["market"], "hash": post["hash"], "medya": medya})
+gecmis.append({"tarih": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "market": post["market"], "medya": medya})
 json.dump(gecmis, open("gecmis.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+paylasilan = json.load(open("paylasilan.json", encoding="utf-8")) if os.path.exists("paylasilan.json") else {}
+bugun = time.strftime("%Y-%m-%d", time.gmtime(time.time() + 3 * 3600))  # Türkiye günü
+for k, fiyat in post["urunler"]:
+    paylasilan[k] = f"{bugun}|{fiyat}"
+json.dump(paylasilan, open("paylasilan.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+# hikaye: gönderi kaydedildikten sonra; başarısız olursa gönderiyi bozmaz
+if post.get("hikaye"):
+    try:
+        url = f"{BASE}/{post['hikaye']}"
+        url_bekle(url)
+        h = api(f"{UID}/media", image_url=url, media_type="STORIES")["id"]
+        hazir_bekle(h)
+        print("Hikaye paylaşıldı:", api(f"{UID}/media_publish", creation_id=h)["id"])
+    except (SystemExit, Exception) as e:
+        print("UYARI: hikaye paylaşılamadı:", e)

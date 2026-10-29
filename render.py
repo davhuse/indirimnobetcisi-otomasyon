@@ -97,7 +97,7 @@ def sayfalar_a():  # koyu marka teması: kapak + 2x2 kartlar + kapanış
 .k{{background:#ffffff12;border:2px solid #ffffff22;border-radius:34px;height:495px;padding:22px 26px 22px;position:relative;display:flex;flex-direction:column;overflow:hidden}}
 .k .ph{{height:210px;width:100%;filter:drop-shadow(0 12px 18px #0008)}}
 .rz{{position:absolute;left:0;top:0;background:{HI};color:{BG};font-family:'Barlow Condensed';font-weight:800;font-size:50px;padding:4px 24px 4px 20px;border-radius:0 0 28px 0;z-index:2}}
-.ad{{font-family:'Barlow Condensed';text-transform:uppercase;font-weight:800;font-size:38px;line-height:1.05;margin-top:12px}}.dt{{font-size:26px;color:#ffffffaa;margin-top:4px}}
+.ad{{font-family:'Barlow Condensed';text-transform:uppercase;font-weight:800;font-size:38px;line-height:1.05;margin-top:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}.dt{{font-size:26px;color:#ffffffaa;margin-top:4px}}
 .fy{{margin-top:auto;display:flex;align-items:flex-end;gap:14px}}
 .p{{background:{AC};border-radius:20px;padding:2px 20px 6px;font-family:'Barlow Condensed';font-weight:800;font-size:80px;line-height:1.05;white-space:nowrap}}.p small{{font-size:38px;margin-left:4px}}
 .es{{font-size:30px;color:#ffffff99;text-decoration:line-through;margin-bottom:12px;white-space:nowrap}}
@@ -193,6 +193,21 @@ with sync_playwright() as p:
             pg.goto("file:///" + os.path.abspath("out/_s.html").replace("\\", "/"))
             pg.evaluate("document.fonts.ready")
             pg.screenshot(path=f"{OUT}/{ad}/{n}.jpg", type="jpeg", quality=92)
+        if ad == "a":  # hikaye: 1080x1920, kapağı ortalar
+            kapak = base64.b64encode(open(f"{OUT}/a/1.jpg", "rb").read()).decode()
+            open("out/_s.html", "w", encoding="utf-8").write(
+                f'<html lang="tr"><meta charset="utf-8"><style>{TEMEL}body{{width:1080px;height:1920px;background:{BG};color:#fff}}'
+                f'.u{{position:absolute;top:110px;left:0;right:0;text-align:center}}.u b{{font-size:120px;font-weight:800;color:{AC}}}'
+                f'.u div{{font-size:50px;font-weight:700;margin-top:6px}}'
+                f'.k{{position:absolute;left:60px;top:390px;width:960px;border-radius:36px;box-shadow:0 0 80px {AC}66}}'
+                f'.a{{position:absolute;bottom:170px;left:0;right:0;text-align:center}}.a span{{background:{HI};color:{BG};font-size:56px;font-weight:800;padding:20px 50px;border-radius:70px}}</style>'
+                f'<div class="u bc"><b>İndirim alarmı</b><div>{e(d["market"])} · {e(d["kontrol_tarihi"])}</div></div>'
+                f'<img class="k" src="data:image/jpeg;base64,{kapak}"><div class="a bc"><span>Tüm liste gönderide</span></div>')
+            pg.set_viewport_size({"width": 1080, "height": 1920})
+            pg.goto("file:///" + os.path.abspath("out/_s.html").replace("\\", "/"))
+            pg.evaluate("document.fonts.ready")
+            pg.screenshot(path=f"{OUT}/hikaye.jpg", type="jpeg", quality=90)
+            pg.set_viewport_size({"width": 1080, "height": 1350})
         print(f"stil {ad}: {len(sayfalar)} görsel")
     b.close()
 print(f"doğrulanmadığı için atılan ürün: {atilan}")
