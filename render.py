@@ -200,9 +200,9 @@ with sync_playwright() as p:
                 f'.u{{position:absolute;top:110px;left:0;right:0;text-align:center}}.u b{{font-size:120px;font-weight:800;color:{AC}}}'
                 f'.u div{{font-size:50px;font-weight:700;margin-top:6px}}'
                 f'.k{{position:absolute;left:60px;top:390px;width:960px;border-radius:36px;box-shadow:0 0 80px {AC}66}}'
-                f'.a{{position:absolute;bottom:170px;left:0;right:0;text-align:center}}.a span{{background:{HI};color:{BG};font-size:56px;font-weight:800;padding:20px 50px;border-radius:70px}}</style>'
+                f'.a{{position:absolute;bottom:50px;left:0;right:0;text-align:center}}.a span{{background:{HI};color:{BG};font-size:56px;font-weight:800;padding:20px 50px;border-radius:70px}}</style>'
                 f'<div class="u bc"><b>İndirim alarmı</b><div>{e(d["market"])} · {e(d["kontrol_tarihi"])}</div></div>'
-                f'<img class="k" src="data:image/jpeg;base64,{kapak}"><div class="a bc"><span>Tüm liste gönderide</span></div>')
+                f'<img class="k" src="data:image/jpeg;base64,{kapak}"><div class="a bc"><span>Tüm liste gönderide</span><br><span style="margin-top:22px;display:inline-block;background:#fff;color:#0a0a0d">Ürün linkleri profilde</span></div>')
             pg.set_viewport_size({"width": 1080, "height": 1920})
             pg.goto("file:///" + os.path.abspath("out/_s.html").replace("\\", "/"))
             pg.evaluate("document.fonts.ready")

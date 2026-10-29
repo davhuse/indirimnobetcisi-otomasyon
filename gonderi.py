@@ -84,7 +84,11 @@ if __name__ == "__main__":
             hikaye = f"{damga}_{m}_hikaye.jpg"
             shutil.copy(f"out/{m}_post/hikaye.jpg", f"out/yayin/{hikaye}")
         json.dump({"market": m, "gorseller": gorseller, "hikaye": hikaye, "caption": caption(d, m),
-                   "urunler": [[anahtar(m, u), u["fiyat"]] for u in secilen]},
+                   "urunler": [[anahtar(m, u), u["fiyat"]] for u in secilen],
+                   "sayfa": {"market": d["market"], "tarih": datetime.now(TR).strftime("%d.%m.%Y %H:%M"),
+                             "not": f'Kontrol: {d["kontrol_tarihi"]} · {d["gecerlilik"]}',
+                             "urunler": [{"ad": u["ad"], "fiyat": u["fiyat"], "eski": u.get("eski_fiyat", ""), "indirim": u.get("indirim", ""),
+                                          "link": u.get("link", "")} for u in secilen]}},
                   open("out/post.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         print(f"Seçilen market: {m}, {len(secilen)} ürün, {len(gorseller)} görsel, hikaye: {'var' if hikaye else 'yok'}")
         devam = "true"

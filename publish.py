@@ -55,6 +55,14 @@ for k, fiyat in post["urunler"]:
     paylasilan[k] = f"{bugun}|{fiyat}"
 json.dump(paylasilan, open("paylasilan.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
+# profil bağlantısındaki ürün linkleri sayfası; hata gönderiyi bozmaz
+try:
+    import sayfa
+    link = requests.get(f"{HOST}/{medya}", params={"fields": "permalink", "access_token": TOKEN}, timeout=30).json().get("permalink", "")
+    sayfa.ekle({**post["sayfa"], "permalink": link})
+except Exception as e:
+    print("UYARI: link sayfası güncellenemedi:", e)
+
 # hikaye: gönderi kaydedildikten sonra; başarısız olursa gönderiyi bozmaz
 if post.get("hikaye"):
     try:

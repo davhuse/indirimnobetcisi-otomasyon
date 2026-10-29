@@ -48,10 +48,10 @@ def dogrula(ad, yeni, eski=None):
     return (eski > yeni and 3 <= y <= 85), y
 
 
-def urun(ad, yeni, eski, gorsel, detay="", not_=""):
+def urun(ad, yeni, eski, gorsel, detay="", not_="", link=""):
     ok, y = dogrula(ad, yeni, eski if eski and eski > yeni else None)
     return {"ad": ad, "detay": detay, "fiyat": tr(yeni), "eski_fiyat": tr(eski) if y else "", "indirim": str(y) if y else "",
-            "not": not_, "src": gorsel, "dogrulandi": ok}
+            "not": not_, "src": gorsel, "link": link, "dogrulandi": ok}
 
 
 AYLAR = {"ocak": 1, "şubat": 2, "mart": 3, "nisan": 4, "mayıs": 5, "haziran": 6, "temmuz": 7,
@@ -87,8 +87,9 @@ def bim():
         if not (ad and k and im):
             continue
         g = re.search(r'gramajadet">([^<]+)', blok)
+        lk = re.search(r'<a href="(/aktuel-urunler/[^"]+)"', blok)
         out.append(urun(metin(ad.group(1)), sayi(k.group(1) + "," + k.group(2)), sayi(es.group(1)) if es else None,
-                        im.group(1), metin(g.group(1)).lstrip("• ") if g else ""))
+                        im.group(1), metin(g.group(1)).lstrip("• ") if g else "", "", BAS + "bim.com.tr" + lk.group(1) if lk else ""))
     return {"market": "BİM", "tema": "kirmizi", "baslik": "Aktüel ürünler", "gecerlilik": hafta[1],
             "kaynak_url": "bim.com.tr/Categories/100/aktuel-urunler.aspx"}, out
 
@@ -101,7 +102,7 @@ def migros():
             if p.get("discountRate", 0) <= 0 or not p.get("images"):
                 continue
             kop = "Migroskop" if any(b.get("value") == "MİGROSKOP" for b in p.get("badges", [])) else ""
-            out.append(urun(p["name"].strip(), p["shownPrice"] / 100, p["regularPrice"] / 100, p["images"][0]["urls"]["PRODUCT_DETAIL"], "", kop))
+            out.append(urun(p["name"].strip(), p["shownPrice"] / 100, p["regularPrice"] / 100, p["images"][0]["urls"]["PRODUCT_DETAIL"], "", kop, BAS + "migros.com.tr/" + p["prettyName"]))
     return {"market": "Migros", "tema": "turuncu", "baslik": "İndirimli ürünler", "gecerlilik": "Bugünkü online fiyatlar",
             "kaynak_url": "migros.com.tr/indirimli-urunler-c-4"}, out
 
@@ -115,8 +116,10 @@ def sok():
             es = re.search(r'data-testid="price"[^>]*>([\d.,]+)', c)
             yn = re.search(r'discountedPrice[^>]*>([\d.,]+)', c)
             im = re.search(r'<img src="(https://images\.ceptesok\.com[^"]+)"', c)
+            lk = re.search(r'href="(/[^"]+-p-\d+)"', c)
             if ad and es and yn and im:
-                out.append(urun(metin(ad.group(1)), sayi(yn.group(1)), sayi(es.group(1)), im.group(1).replace("width=216,height=216", "width=600,height=600")))
+                out.append(urun(metin(ad.group(1)), sayi(yn.group(1)), sayi(es.group(1)), im.group(1).replace("width=216,height=216", "width=600,height=600"),
+                                "", "", BAS + "sokmarket.com.tr" + lk.group(1) if lk else ""))
     return {"market": "ŞOK", "tema": "sari", "baslik": "Haftanın fırsatları", "gecerlilik": "Bugünkü online fiyatlar",
             "kaynak_url": "sokmarket.com.tr/indirimli-urunler-cms-pl1"}, out
 
@@ -130,9 +133,11 @@ def carrefour():
         es = re.search(r'class="priceLineThrough[^"]*">(.*?)</span>\s*</span>', c, re.S)
         im = re.search(r'data-src="(https://images\.csfour\.com[^"]+)"', c)
         kart = "CarrefourSA Kart ile" if "Kart ile" in c else ""
+        lk = re.search(r'<a href="(/[^"]+-p-\d+)"', c)
         if ad and yn and im:
             out.append(urun(metin(ad.group(1)), float(yn.group(1)), sayi(metin(es.group(1))) if es else None,
-                            re.sub(r"/mnresize/\d+/\d+/", "/mnresize/600/600/", im.group(1)), "", kart))
+                            re.sub(r"/mnresize/\d+/\d+/", "/mnresize/600/600/", im.group(1)), "", kart,
+                            BAS + "carrefoursa.com" + lk.group(1) if lk else ""))
     return {"market": "CarrefourSA", "tema": "mavi", "baslik": "Fırsat ürünleri", "gecerlilik": "Bugünkü online fiyatlar",
             "kaynak_url": "carrefoursa.com/firsatlar/c/9002"}, out
 

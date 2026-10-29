@@ -7,3 +7,4 @@ urunler*.json
 anahtar*.txt
 topla_a101.py
 cron-job-ayarlari.txt
+!docs/*.html
