@@ -1,0 +1,8 @@
+__pycache__/
+out/
+veri/
+gorseller/
+urunler*.json
+*.html
+anahtar*.txt
+topla_a101.py
