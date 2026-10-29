@@ -63,36 +63,77 @@ def rozet(u, sinif="rz", onek="%"):
     return f'<div class="{sinif}">{onek}{e(u["indirim"])}</div>' if u.get("indirim") else ""
 
 
-def sayfalar_a():  # koyu 2x2
-    css = f"""body{{background:{BG};color:#fff}}.bg{{position:absolute;inset:0;background:radial-gradient(900px 700px at 105% -5%,{AC}66,transparent 70%)}}
+def para(x):
+    return float(x.replace(".", "").replace(",", "."))
+
+
+def tl(x):
+    return f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def logo(sinif):
+    if not os.path.exists("logo.png"):
+        return ""
+    return f'<img class="{sinif}" src="data:image/png;base64,{base64.b64encode(open("logo.png", "rb").read()).decode()}">'
+
+
+def sayfalar_a():  # koyu marka teması: kapak + 2x2 kartlar + kapanış
+    css = f"""body{{background:{BG};color:#fff}}.bg{{position:absolute;inset:0;background:radial-gradient(900px 700px at 105% -5%,{AC}66,transparent 70%),radial-gradient(700px 500px at -10% 105%,{AC}33,transparent 70%)}}
 .alt{{background:#00000066;color:#ffffffbb}}.alt b{{color:#fff}}.dots i{{background:#ffffff44}}.dots i.on{{background:{HI}}}
-.w{{position:relative;padding:70px 60px 0}}.pill{{display:inline-block;background:{AC};font-weight:800;font-size:44px;letter-spacing:4px;padding:8px 32px;border-radius:60px}}
-.sy{{position:absolute;right:60px;top:78px;font-size:44px;color:#ffffff99;font-weight:700}}
-.kh{{font-size:200px;font-weight:800;line-height:1.02;margin:60px 0 30px}}.tr{{font-size:60px;font-weight:700;color:{HI}}}
-.say{{position:absolute;left:60px;bottom:230px;font-size:46px;font-weight:600}}.say b{{font-size:150px;font-family:'Barlow Condensed';color:{AC};vertical-align:-18px;margin-right:12px}}
-.kd{{position:absolute;right:60px;bottom:240px;background:{HI};color:{BG};font-weight:800;font-size:44px;padding:16px 38px;border-radius:60px}}
+.w{{position:relative;padding:60px 60px 0}}.pill{{display:inline-block;background:{AC};font-weight:800;font-size:44px;letter-spacing:4px;padding:8px 32px;border-radius:60px}}
+.lg{{position:absolute;right:56px;top:40px;width:112px;height:112px;border-radius:50%;box-shadow:0 0 30px {AC}88}}
+.hn{{position:absolute;right:190px;top:80px;font-size:30px;font-weight:600;color:#ffffffaa}}
+.sy{{position:absolute;right:190px;top:70px;font-size:44px;color:#ffffffaa;font-weight:700}}
+.et{{font-size:64px;font-weight:800;color:{HI};letter-spacing:3px;margin-top:46px}}
+.hero{{font-size:340px;font-weight:800;line-height:.86;color:#fff;text-shadow:0 10px 60px {AC}}}.hero span{{color:{AC};text-shadow:0 0 50px {AC}88}}
+.vr{{font-size:76px;font-weight:800;letter-spacing:2px;margin-top:6px}}
+.tar{{display:inline-block;margin-top:26px;background:{HI};color:{BG};font-size:48px;font-weight:800;padding:6px 28px;border-radius:14px}}
+.col{{position:absolute;left:0;right:0;top:790px;height:270px}}
+.col .t{{position:absolute;width:250px;height:250px;background:#fff;border-radius:34px;box-shadow:0 20px 40px #000a;display:flex;align-items:center;justify-content:center}}
+.col .t img{{width:222px;height:222px;object-fit:contain;background:none;border-radius:0}}
+.say{{position:absolute;left:60px;bottom:150px;font-size:44px;font-weight:600}}.say b{{font-size:120px;font-family:'Barlow Condensed';color:{AC};vertical-align:-14px;margin-right:12px}}
+.kd{{position:absolute;right:60px;bottom:156px;background:{HI};color:{BG};font-weight:800;font-size:44px;padding:16px 38px;border-radius:60px}}
 .g{{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:34px}}
-.k{{background:#ffffff12;border:2px solid #ffffff22;border-radius:34px;height:495px;padding:22px 26px 24px;position:relative;display:flex;flex-direction:column;overflow:hidden}}
-.k .ph{{height:215px;width:100%;filter:drop-shadow(0 12px 18px #0008)}}
+.k{{background:#ffffff12;border:2px solid #ffffff22;border-radius:34px;height:495px;padding:22px 26px 22px;position:relative;display:flex;flex-direction:column;overflow:hidden}}
+.k .ph{{height:210px;width:100%;filter:drop-shadow(0 12px 18px #0008)}}
 .rz{{position:absolute;left:0;top:0;background:{HI};color:{BG};font-family:'Barlow Condensed';font-weight:800;font-size:50px;padding:4px 24px 4px 20px;border-radius:0 0 28px 0;z-index:2}}
 .ad{{font-family:'Barlow Condensed';text-transform:uppercase;font-weight:800;font-size:38px;line-height:1.05;margin-top:12px}}.dt{{font-size:26px;color:#ffffffaa;margin-top:4px}}
 .fy{{margin-top:auto;display:flex;align-items:flex-end;gap:14px}}
 .p{{background:{AC};border-radius:20px;padding:2px 20px 6px;font-family:'Barlow Condensed';font-weight:800;font-size:80px;line-height:1.05;white-space:nowrap}}.p small{{font-size:38px;margin-left:4px}}
 .es{{font-size:30px;color:#ffffff99;text-decoration:line-through;margin-bottom:12px;white-space:nowrap}}
-.nt{{font-size:22px;color:{HI};margin-top:-4px;font-weight:600}}"""
+.nt{{font-size:20px;color:{HI};margin-top:4px;font-weight:600;min-height:28px;white-space:nowrap}}
+.cta{{position:relative;text-align:center;padding-top:70px}}.cta .big{{width:420px;height:420px;border-radius:50%;box-shadow:0 0 90px {AC}99}}
+.cta h2{{font-size:124px;font-weight:800;line-height:.95;margin-top:44px}}.cta h2 span{{color:{HI}}}
+.cta p{{font-size:44px;color:#ffffffdd;margin-top:22px;line-height:1.35}}
+.cta .nk{{margin:34px 70px 0;background:#ffffff12;border-radius:26px;padding:24px 30px;font-size:30px;line-height:1.45;color:#ffffffcc}}"""
     ps = 4
     parca = [urunler[i:i + ps] for i in range(0, len(urunler), ps)]
-    top = len(parca) + 1
-    out = [cerceve(css, 1, top, f'<div class="bg"></div><div class="w"><span class="pill bc">{e(d["market"])}</span>'
-                   f'<div class="kh bc">{e(d["baslik"])}</div><div class="tr bc">{e(d["gecerlilik"])}</div></div>'
-                   f'<div class="say"><b>{len(urunler)}</b>ürün seçtik</div><div class="kd bc">KAYDIR →</div>')]
+    top = len(parca) + 2
+    en = max((int(u["indirim"]) for u in urunler if u.get("indirim")), default=0)
+    foto3 = [u for u in sorted(urunler, key=lambda u: -int(u.get("indirim") or 0)) if u.get("gorsel")][:3]
+    rot = [(-7, 70, 20), (0, 415, 0), (7, 760, 20)]
+    tiles = "".join(f'<div class="t" style="left:{x}px;top:{y}px;transform:rotate({r}deg)">{foto(u)}</div>' for u, (r, x, y) in zip(foto3, rot))
+    hero = f'<div class="hero bc"><span>%</span>{en}</div><div class="vr bc">EN YÜKSEK İNDİRİM</div>' if en else f'<div class="hero bc" style="font-size:180px">{e(d["baslik"])}</div>'
+    out = [cerceve(css, 1, top, f'<div class="bg"></div><div class="w"><span class="pill bc">{e(d["market"])}</span>{logo("lg")}'
+                   f'<div class="et bc">{e(d["baslik"])}</div>{hero}<div class="tar bc">{e(d["gecerlilik"])}</div></div>'
+                   f'<div class="col">{tiles}</div><div class="say"><b>{len(urunler)}</b>ürün seçtik</div><div class="kd bc">KAYDIR →</div>')]
     for n, p in enumerate(parca, 2):
-        kart = "".join(f'<div class="k">{rozet(u)}{foto(u)}<div class="ad">{e(u["ad"])}</div><div class="dt">{e(u.get("detay", ""))}</div>'
-                       f'<div class="fy"><div class="p">{e(u["fiyat"])}<small>TL</small></div>'
-                       f'<div class="es">{e(u.get("eski_fiyat", ""))}</div></div>'
-                       f'{"<div class=nt>" + e(u["not"]) + "</div>" if u.get("not") else ""}</div>' for u in p)
-        out.append(cerceve(css, n, top, f'<div class="bg"></div><div class="w"><span class="pill bc">{e(d["market"])}</span>'
+        kart = ""
+        for u in p:
+            if u.get("eski_fiyat"):
+                fark = para(u["eski_fiyat"]) - para(u["fiyat"])
+                alt = f'{tl(fark)} TL ucuz' + (f' · {e(u["not"])}' if u.get("not") else "")
+            else:
+                alt = e(u.get("not", ""))
+            kart += (f'<div class="k">{rozet(u)}{foto(u)}<div class="ad">{e(u["ad"])}</div><div class="dt">{e(u.get("detay", ""))}</div>'
+                     f'<div class="fy"><div class="p">{e(u["fiyat"])}<small>TL</small></div><div class="es">{e(u.get("eski_fiyat", ""))}</div></div>'
+                     f'<div class="nt">{alt}</div></div>')
+        out.append(cerceve(css, n, top, f'<div class="bg"></div><div class="w"><span class="pill bc">{e(d["market"])}</span>{logo("lg")}'
                            f'<div class="sy bc">{n - 1}/{len(parca)}</div><div class="g">{kart}</div></div>'))
+    out.append(cerceve(css, top, top, f'<div class="bg"></div><div class="cta">{logo("big")}'
+                       '<h2 class="bc">Alarmı <span>kaçırma</span></h2>'
+                       '<p>Kaydet, arkadaşına gönder.<br>Her gün yeni indirim için takip et.</p>'
+                       '<div class="nk">Fiyatlar mağazaya ve bölgeye göre değişebilir, stoklar tükenebilir. Gönderi bilgi amaçlıdır.</div></div>'))
     return out
 
 
