@@ -1,5 +1,62 @@
 [
  {
+  "market": "BİM",
+  "tarih": "29.10.2026 21:31",
+  "not": "Kontrol: 29.10.2026 · 24-30 Ekim",
+  "urunler": [
+   {
+    "ad": "Patates Cipsi Sade",
+    "fiyat": "79,00",
+    "eski": "110,00",
+    "indirim": "28",
+    "link": "https://www.bim.com.tr/aktuel-urunler/patates-cipsi-sade-24-10/aktuel.aspx"
+   },
+   {
+    "ad": "Lavaş Tortilla",
+    "fiyat": "62,50",
+    "eski": "79,00",
+    "indirim": "21",
+    "link": "https://www.bim.com.tr/aktuel-urunler/lavas-tortilla-24-10/aktuel.aspx"
+   },
+   {
+    "ad": "Yeşil Mercimek",
+    "fiyat": "54,00",
+    "eski": "67,50",
+    "indirim": "20",
+    "link": "https://www.bim.com.tr/aktuel-urunler/yesil-mercimek-24-10/aktuel.aspx"
+   },
+   {
+    "ad": "Yerli Pilavlık Pirinç",
+    "fiyat": "132,50",
+    "eski": "147,50",
+    "indirim": "10",
+    "link": "https://www.bim.com.tr/aktuel-urunler/yerli-pilavlik-pirinc-24-10/aktuel.aspx"
+   },
+   {
+    "ad": "Beyaz Nohut",
+    "fiyat": "89,00",
+    "eski": "99,00",
+    "indirim": "10",
+    "link": "https://www.bim.com.tr/aktuel-urunler/beyaz-nohut-24-10/aktuel.aspx"
+   },
+   {
+    "ad": "Basmati Pirinç",
+    "fiyat": "95,00",
+    "eski": "105,00",
+    "indirim": "10",
+    "link": "https://www.bim.com.tr/aktuel-urunler/basmati-pirinc-24-10/aktuel.aspx"
+   },
+   {
+    "ad": "Hamburger Ekmeği",
+    "fiyat": "64,50",
+    "eski": "72,00",
+    "indirim": "10",
+    "link": "https://www.bim.com.tr/aktuel-urunler/hamburger-ekmegi-24-10/aktuel.aspx"
+   }
+  ],
+  "permalink": "https://www.instagram.com/p/DfFqE11FCdg/"
+ },
+ {
   "market": "ŞOK",
   "tarih": "29.10.2026 18:01",
   "not": "Kontrol: 29.10.2026 · Bugünkü online fiyatlar",
