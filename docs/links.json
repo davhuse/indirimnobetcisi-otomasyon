@@ -1,5 +1,69 @@
 [
  {
+  "market": "Migros",
+  "tarih": "30.10.2026 09:01",
+  "not": "Kontrol: 30.10.2026 · Bugünkü online fiyatlar",
+  "urunler": [
+   {
+    "ad": "Alpro Şekersiz Yulaf İçeceği 1 L",
+    "fiyat": "149,90",
+    "eski": "225,00",
+    "indirim": "33",
+    "link": "https://www.migros.com.tr/alpro-sekersiz-yulaf-icecegi-1-l-p-a823cf"
+   },
+   {
+    "ad": "Alpro Hindistan Cevizi İçeceği Şekersiz 1 L",
+    "fiyat": "149,90",
+    "eski": "225,00",
+    "indirim": "33",
+    "link": "https://www.migros.com.tr/alpro-hindistan-cevizi-icecegi-sekersiz-1-l-p-a82300"
+   },
+   {
+    "ad": "Bahçıvan Süzme Peynir 500 G",
+    "fiyat": "144,90",
+    "eski": "209,00",
+    "indirim": "31",
+    "link": "https://www.migros.com.tr/bahcivan-suzme-peynir-500-g-p-98c9b7"
+   },
+   {
+    "ad": "Balparmak Yayla Çiçek Balı 850 G",
+    "fiyat": "579,90",
+    "eski": "834,95",
+    "indirim": "31",
+    "link": "https://www.migros.com.tr/balparmak-yayla-cicek-bali-850-g-p-6be1c6"
+   },
+   {
+    "ad": "Balparmak Çam Balı 850 G",
+    "fiyat": "579,90",
+    "eski": "834,95",
+    "indirim": "31",
+    "link": "https://www.migros.com.tr/balparmak-cam-bali-850-g-p-6be1d0"
+   },
+   {
+    "ad": "Kellogg's Coco Pops Kakaolu Mısır ve Buğday Gevreği 700 G",
+    "fiyat": "183,37",
+    "eski": "261,95",
+    "indirim": "30",
+    "link": "https://www.migros.com.tr/kelloggs-coco-pops-kakaolu-misir-ve-bugday-gevregi-700-g-p-4dcb32"
+   },
+   {
+    "ad": "Fora Dilimli Siyah Zeytin 160 G",
+    "fiyat": "89,00",
+    "eski": "125,00",
+    "indirim": "29",
+    "link": "https://www.migros.com.tr/fora-dilimli-siyah-zeytin-160-g-p-f4502a"
+   },
+   {
+    "ad": "Fora Dilimli Yeşil Zeytin 160 G",
+    "fiyat": "89,00",
+    "eski": "125,00",
+    "indirim": "29",
+    "link": "https://www.migros.com.tr/fora-dilimli-yesil-zeytin-160-g-p-f476ab"
+   }
+  ],
+  "permalink": "https://www.instagram.com/p/DfG5EGLDmU0/"
+ },
+ {
   "market": "BİM",
   "tarih": "29.10.2026 21:31",
   "not": "Kontrol: 29.10.2026 · 24-30 Ekim",
