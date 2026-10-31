@@ -1,5 +1,55 @@
 [
  {
+  "market": "Migros",
+  "tarih": "31.10.2026 21:31",
+  "not": "Kontrol: 31.10.2026 · Bugünkü online fiyatlar",
+  "urunler": [
+   {
+    "ad": "Nestle Damak Antep Fıstığı Parçalı Kakaolu Krema 375 G",
+    "fiyat": "395,00",
+    "eski": "495,00",
+    "indirim": "20",
+    "link": "https://www.migros.com.tr/nestle-damak-antep-fistigi-parcali-kakaolu-krema-375-g-p-6d2029"
+   },
+   {
+    "ad": "Tahsildaroğlu Taze Kaşar Peyniri 600 G",
+    "fiyat": "399,90",
+    "eski": "499,90",
+    "indirim": "20",
+    "link": "https://www.migros.com.tr/tahsildaroglu-taze-kasar-peyniri-600-g-p-9a2b64"
+   },
+   {
+    "ad": "Tahsildaroğlu Taze Tam Yağlı Örgü Peyniri 180 G",
+    "fiyat": "159,90",
+    "eski": "199,90",
+    "indirim": "20",
+    "link": "https://www.migros.com.tr/tahsildaroglu-taze-tam-yagli-orgu-peyniri-180-g-p-9a1d3c"
+   },
+   {
+    "ad": "President Kaşar Peyniri 600 G",
+    "fiyat": "329,90",
+    "eski": "395,90",
+    "indirim": "17",
+    "link": "https://www.migros.com.tr/president-kasar-peyniri-600-g-p-9a226a"
+   },
+   {
+    "ad": "Sütaş Kaymak Gibi Kaymaksız Yoğurt 1250 G",
+    "fiyat": "129,95",
+    "eski": "149,95",
+    "indirim": "13",
+    "link": "https://www.migros.com.tr/sutas-kaymak-gibi-kaymaksiz-yogurt-1250-g-p-bec05a"
+   },
+   {
+    "ad": "İçim Doğal Yoğurt Yarım Yağlı 2000 G",
+    "fiyat": "139,90",
+    "eski": "157,50",
+    "indirim": "11",
+    "link": "https://www.migros.com.tr/icim-dogal-yogurt-yarim-yagli-2000-g-p-bee315"
+   }
+  ],
+  "permalink": "https://www.instagram.com/p/DfKzo5JlMhy/"
+ },
+ {
   "market": "ŞOK",
   "tarih": "31.10.2026 18:01",
   "not": "Kontrol: 31.10.2026 · Bugünkü online fiyatlar",
@@ -439,62 +489,5 @@
    }
   ],
   "permalink": "https://www.instagram.com/p/DfG5EGLDmU0/"
- },
- {
-  "market": "BİM",
-  "tarih": "29.10.2026 21:31",
-  "not": "Kontrol: 29.10.2026 · 24-30 Ekim",
-  "urunler": [
-   {
-    "ad": "Patates Cipsi Sade",
-    "fiyat": "79,00",
-    "eski": "110,00",
-    "indirim": "28",
-    "link": "https://www.bim.com.tr/aktuel-urunler/patates-cipsi-sade-24-10/aktuel.aspx"
-   },
-   {
-    "ad": "Lavaş Tortilla",
-    "fiyat": "62,50",
-    "eski": "79,00",
-    "indirim": "21",
-    "link": "https://www.bim.com.tr/aktuel-urunler/lavas-tortilla-24-10/aktuel.aspx"
-   },
-   {
-    "ad": "Yeşil Mercimek",
-    "fiyat": "54,00",
-    "eski": "67,50",
-    "indirim": "20",
-    "link": "https://www.bim.com.tr/aktuel-urunler/yesil-mercimek-24-10/aktuel.aspx"
-   },
-   {
-    "ad": "Yerli Pilavlık Pirinç",
-    "fiyat": "132,50",
-    "eski": "147,50",
-    "indirim": "10",
-    "link": "https://www.bim.com.tr/aktuel-urunler/yerli-pilavlik-pirinc-24-10/aktuel.aspx"
-   },
-   {
-    "ad": "Beyaz Nohut",
-    "fiyat": "89,00",
-    "eski": "99,00",
-    "indirim": "10",
-    "link": "https://www.bim.com.tr/aktuel-urunler/beyaz-nohut-24-10/aktuel.aspx"
-   },
-   {
-    "ad": "Basmati Pirinç",
-    "fiyat": "95,00",
-    "eski": "105,00",
-    "indirim": "10",
-    "link": "https://www.bim.com.tr/aktuel-urunler/basmati-pirinc-24-10/aktuel.aspx"
-   },
-   {
-    "ad": "Hamburger Ekmeği",
-    "fiyat": "64,50",
-    "eski": "72,00",
-    "indirim": "10",
-    "link": "https://www.bim.com.tr/aktuel-urunler/hamburger-ekmegi-24-10/aktuel.aspx"
-   }
-  ],
-  "permalink": "https://www.instagram.com/p/DfFqE11FCdg/"
  }
 ]
