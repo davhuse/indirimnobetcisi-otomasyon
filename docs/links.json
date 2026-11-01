@@ -1,6 +1,70 @@
 [
  {
   "market": "ŞOK",
+  "tarih": "01.11.2026 18:01",
+  "not": "Kontrol: 01.11.2026 · Bugünkü online fiyatlar",
+  "urunler": [
+   {
+    "ad": "Nivea Aqua Rose Makyaj Temizleyici 400 Ml",
+    "fiyat": "142,00",
+    "eski": "285,00",
+    "indirim": "50",
+    "link": "https://www.sokmarket.com.tr/nivea-aqua-rose-makyaj-temizleyici-400-ml-p-4413"
+   },
+   {
+    "ad": "Nestle Coffee Mate 625 g",
+    "fiyat": "199,00",
+    "eski": "329,00",
+    "indirim": "40",
+    "link": "https://www.sokmarket.com.tr/nestle-coffee-mate-625-g-p-318376"
+   },
+   {
+    "ad": "The Kitap Yayınları Dokun Hisset- Deniz Karıştı",
+    "fiyat": "150,00",
+    "eski": "250,00",
+    "indirim": "40",
+    "link": "https://www.sokmarket.com.tr/the-kitap-yayinlari-dokun-hisset-deniz-karisti-p-760480"
+   },
+   {
+    "ad": "Mon Amour Super Stay Full Lash Mascara",
+    "fiyat": "149,00",
+    "eski": "249,00",
+    "indirim": "40",
+    "link": "https://www.sokmarket.com.tr/mon-amour-super-stay-full-lash-mascara-p-2537"
+   },
+   {
+    "ad": "Hobby Kıvır Kıvır Jöle 150 Ml",
+    "fiyat": "119,00",
+    "eski": "199,00",
+    "indirim": "40",
+    "link": "https://www.sokmarket.com.tr/hobby-kivir-kivir-jole-150-ml-p-751106"
+   },
+   {
+    "ad": "Schogetten Fındık Dolgulu Çikolata 100 g",
+    "fiyat": "119,00",
+    "eski": "199,00",
+    "indirim": "40",
+    "link": "https://www.sokmarket.com.tr/schogetten-findik-dolgulu-cikolata-100-g-p-849999"
+   },
+   {
+    "ad": "Simply Duracell Aa Kalem Pil 6'lı",
+    "fiyat": "159,00",
+    "eski": "259,95",
+    "indirim": "39",
+    "link": "https://www.sokmarket.com.tr/simply-duracell-aa-kalem-pil-6-li-p-3755"
+   },
+   {
+    "ad": "Simply Duracell Aaa İnce Kalem Pil 6'lı",
+    "fiyat": "159,00",
+    "eski": "259,95",
+    "indirim": "39",
+    "link": "https://www.sokmarket.com.tr/simply-duracell-aaa-ince-kalem-pil-6-li-p-3368"
+   }
+  ],
+  "permalink": "https://www.instagram.com/p/DfNAdLikRkn/"
+ },
+ {
+  "market": "ŞOK",
   "tarih": "01.11.2026 13:01",
   "not": "Kontrol: 01.11.2026 · Bugünkü online fiyatlar",
   "urunler": [
@@ -425,69 +489,5 @@
    }
   ],
   "permalink": "https://www.instagram.com/p/DfIO3_-lGvT/"
- },
- {
-  "market": "Migros",
-  "tarih": "30.10.2026 18:01",
-  "not": "Kontrol: 30.10.2026 · Bugünkü online fiyatlar",
-  "urunler": [
-   {
-    "ad": "Bahçıvan Mozzarella Peyniri Rende 200 G",
-    "fiyat": "169,90",
-    "eski": "229,95",
-    "indirim": "26",
-    "link": "https://www.migros.com.tr/bahcivan-mozzarella-peyniri-rende-200-g-p-9a24e3"
-   },
-   {
-    "ad": "Sarelle Bitter Fındık Ezmesi (Vegan) 350 G",
-    "fiyat": "159,90",
-    "eski": "215,00",
-    "indirim": "26",
-    "link": "https://www.migros.com.tr/sarelle-bitter-findik-ezmesi-vegan-350-g-p-6d3051"
-   },
-   {
-    "ad": "Sarelle Fındık Ezmesi 350 G",
-    "fiyat": "275,90",
-    "eski": "369,95",
-    "indirim": "25",
-    "link": "https://www.migros.com.tr/sarelle-findik-ezmesi-350-g-p-6d303f"
-   },
-   {
-    "ad": "Kellogg's Çikolata Parçacıklı & Fındıklı  Granola 340 G",
-    "fiyat": "179,95",
-    "eski": "239,90",
-    "indirim": "25",
-    "link": "https://www.migros.com.tr/kelloggs-cikolata-parcacikli-findikli-granola-340-g-p-4dcec2"
-   },
-   {
-    "ad": "Torku Yarım Yağlı Taze Lor Peyniri 500 G",
-    "fiyat": "94,50",
-    "eski": "124,95",
-    "indirim": "24",
-    "link": "https://www.migros.com.tr/torku-yarim-yagli-taze-lor-peyniri-500-g-p-9ecbba"
-   },
-   {
-    "ad": "Pol's Gurme Serisi Antep Fıstıklı Tahin Helvası 300 G",
-    "fiyat": "229,95",
-    "eski": "302,50",
-    "indirim": "24",
-    "link": "https://www.migros.com.tr/pols-gurme-serisi-antep-fistikli-tahin-helvasi-300-g-p-6c0985"
-   },
-   {
-    "ad": "Tahsildaroğlu Klasik İnek Beyaz Peyniri 500 G",
-    "fiyat": "299,90",
-    "eski": "389,95",
-    "indirim": "23",
-    "link": "https://www.migros.com.tr/tahsildaroglu-klasik-inek-beyaz-peyniri-500-g-p-98e1a1"
-   },
-   {
-    "ad": "Tahsildaroğlu Dilimli Klasik İnek Beyaz Peynir 450 G",
-    "fiyat": "299,90",
-    "eski": "389,95",
-    "indirim": "23",
-    "link": "https://www.migros.com.tr/tahsildaroglu-dilimli-klasik-inek-beyaz-peynir-450-g-p-98e1a0"
-   }
-  ],
-  "permalink": "https://www.instagram.com/p/DfH240nEU-W/"
  }
 ]
